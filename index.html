@@ -1638,6 +1638,67 @@ body {
     right: 70px;
   }
 }
+
+/* ── HERO CTA ── */
+.hero-cta-wrap {
+  margin-top: 40px;
+  animation: fadeUp 0.8s 0.45s ease both;
+}
+.hero-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px 14px 16px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(167,139,250,0.14), rgba(124,58,237,0.2));
+  border: 1px solid rgba(167,139,250,0.4);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 28px rgba(124,58,237,0.12), inset 0 1px 0 rgba(255,255,255,0.07);
+}
+.hero-cta-btn:hover {
+  background: linear-gradient(135deg, rgba(167,139,250,0.24), rgba(124,58,237,0.3));
+  border-color: rgba(167,139,250,0.65);
+  box-shadow: 0 0 44px rgba(124,58,237,0.28), inset 0 1px 0 rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+}
+.hero-cta-btn:active { transform: translateY(0) scale(0.98); }
+.hero-cta-mini-orb {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, #C4B5FD 40%, #7C3AED 75%, #2E0D65);
+  box-shadow: 0 0 14px rgba(124,58,237,0.7);
+  flex-shrink: 0;
+  position: relative;
+  animation: breathe 3s ease-in-out infinite;
+}
+.hero-cta-mini-orb::after {
+  content: '';
+  position: absolute;
+  inset: 20% 26% 52% 20%;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.85);
+  filter: blur(2px);
+}
+.hero-cta-arrow {
+  font-size: 15px;
+  color: rgba(196,181,253,0.7);
+  transition: transform 0.3s;
+}
+.hero-cta-btn:hover .hero-cta-arrow { transform: translateX(4px); }
+.hero-cta-sub {
+  margin-top: 11px;
+  font-size: 10.5px;
+  color: rgba(167,139,250,0.38);
+  letter-spacing: 0.07em;
+}
 </style>
 </head>
 <body>
@@ -1777,6 +1838,13 @@ body {
           <span class="meta-label" data-i18n="hero_year_label">Año</span>
           <span class="meta-value">2026</span>
         </div>
+      <div class="hero-cta-wrap">
+        <a href="app.html" target="_blank" rel="noopener" class="hero-cta-btn">
+          <div class="hero-cta-mini-orb"></div>
+          <span data-i18n="hero_cta_label">Probar el prototipo</span>
+          <span class="hero-cta-arrow">→</span>
+        </a>
+        <div class="hero-cta-sub" data-i18n="hero_cta_sub">Abre en nueva pestaña · experiencia completa</div>
       </div>
     </div>
     <div class="hero-visual">
@@ -2180,24 +2248,24 @@ body {
               </div>
               <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:4px 0 10px">
                 <div>
-                  <div class="ps-greet">Good morning,</div>
+                  <div class="ps-greet" data-i18n="sc_greet">Good morning,</div>
                   <div class="ps-name">Lucía</div>
                 </div>
                 <div style="width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(255,255,255,0.2),rgba(167,139,250,0.4));border:1px solid rgba(167,139,250,0.35)"></div>
               </div>
               <div class="ps-card" style="position:relative">
-                <div style="font-size:7px;color:rgba(240,235,248,0.4);margin-bottom:6px;letter-spacing:0.1em;text-transform:uppercase">Now</div>
+                <div style="font-size:7px;color:rgba(240,235,248,0.4);margin-bottom:6px;letter-spacing:0.1em;text-transform:uppercase" data-i18n="sc_now">Now</div>
                 <div class="ps-row">
                   <div class="ps-mini-orb" style="background:radial-gradient(circle at 33% 28%,#fff,#C4B5FD 40%,#A78BFA 65%,#5b21b6)"></div>
                   <div>
-                    <div class="ps-mood-name">Calm</div>
-                    <div class="ps-mood-time">2h ago · Afternoon</div>
+                    <div class="ps-mood-name" data-i18n="sc_calm">Calm</div>
+                    <div class="ps-mood-time" data-i18n="sc_mood_time">2h ago · Afternoon</div>
                   </div>
                 </div>
-                <div class="ps-note">Quiet afternoon, good coffee. Feeling present.</div>
+                <div class="ps-note" data-i18n="sc_home_note">Quiet afternoon, good coffee. Feeling present.</div>
               </div>
               <div class="ps-card">
-                <div style="font-size:7px;color:rgba(240,235,248,0.4);margin-bottom:7px;letter-spacing:0.1em;text-transform:uppercase">This week</div>
+                <div style="font-size:7px;color:rgba(240,235,248,0.4);margin-bottom:7px;letter-spacing:0.1em;text-transform:uppercase" data-i18n="sc_week">This week</div>
                 <div class="ps-week">
                   <div class="ps-wd"><div class="ps-dot" style="background:radial-gradient(circle at 35% 30%,#fff,#FFB830 60%,#c4870a)"></div><span class="ps-dl">M</span></div>
                   <div class="ps-wd"><div class="ps-dot" style="background:radial-gradient(circle at 35% 30%,#fff,#FF6B35 60%,#9e3d14)"></div><span class="ps-dl">T</span></div>
@@ -2210,21 +2278,21 @@ body {
               </div>
               <div class="ps-cta">
                 <div>
-                  <div class="ps-cta-label">Daily check-in</div>
-                  <div class="ps-cta-text">How are you feeling now?</div>
+                  <div class="ps-cta-label" data-i18n="sc_cta_label">Daily check-in</div>
+                  <div class="ps-cta-text" data-i18n="sc_cta_text">How are you feeling now?</div>
                 </div>
                 <div style="width:26px;height:26px;border-radius:50%;background:rgba(167,139,250,0.2);display:flex;align-items:center;justify-content:center;font-size:11px">✦</div>
               </div>
             </div>
             <div class="ps-nav">
-              <div class="ps-ni on"><div class="ps-ni-i">⌂</div><div class="ps-ni-d"></div><div class="ps-ni-l">Home</div></div>
-              <div class="ps-ni"><div class="ps-ni-i">◎</div><div class="ps-ni-l">Check</div></div>
+              <div class="ps-ni on"><div class="ps-ni-i">⌂</div><div class="ps-ni-d"></div><div class="ps-ni-l" data-i18n="sc_nav_home">Home</div></div>
+              <div class="ps-ni"><div class="ps-ni-i">◎</div><div class="ps-ni-l" data-i18n="sc_nav_check">Check</div></div>
               <div class="ps-ni"><div class="ps-ni-i">◐</div><div class="ps-ni-l">Lume</div></div>
-              <div class="ps-ni"><div class="ps-ni-i">✦</div><div class="ps-ni-l">Galaxy</div></div>
-              <div class="ps-ni"><div class="ps-ni-i">◉</div><div class="ps-ni-l">Profile</div></div>
+              <div class="ps-ni"><div class="ps-ni-i">✦</div><div class="ps-ni-l" data-i18n="sc_nav_galaxy">Galaxy</div></div>
+              <div class="ps-ni"><div class="ps-ni-i">◉</div><div class="ps-ni-l" data-i18n="sc_nav_profile">Profile</div></div>
             </div>
           </div>
-          <div class="screen-label">Home</div>
+          <div class="screen-label" data-i18n="sc_label_home">Home</div>
         </div>
 
         <!-- CHECK-IN -->
@@ -2239,15 +2307,15 @@ body {
                 <div class="ps-logo-label">lume mood</div>
                 <div style="width:20px"></div>
               </div>
-              <div class="ps-hint">drag · tap · feel</div>
+              <div class="ps-hint" data-i18n="sc_hint">drag · tap · feel</div>
               <div class="ps-main-orb-wrap">
                 <div class="ps-main-ring ps-mr1"></div>
                 <div class="ps-main-ring ps-mr2"></div>
                 <div class="ps-main-orb-el" style="background:radial-gradient(circle at 33% 28%,#fff,#C4B5FD 35%,#8B5CF6 60%,#4C1D95 85%)"></div>
               </div>
               <div class="ps-mood-display">
-                <div class="ps-mood-big">Calm</div>
-                <div class="ps-mood-sub">drag to change</div>
+                <div class="ps-mood-big" data-i18n="sc_calm">Calm</div>
+                <div class="ps-mood-sub" data-i18n="sc_drag_sub">drag to change</div>
               </div>
               <div class="ps-pips">
                 <div class="ps-pip" style="background:var(--m0)"></div>
@@ -2257,12 +2325,12 @@ body {
                 <div class="ps-pip" style="background:var(--m4)"></div>
               </div>
               <div style="width:100%;margin-top:16px;padding:0 0 4px">
-                <div style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px 12px;font-size:8px;color:rgba(240,235,248,0.35);font-style:italic">A note about your state… (optional)</div>
+                <div style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px 12px;font-size:8px;color:rgba(240,235,248,0.35);font-style:italic" data-i18n="sc_note_ph">A note about your state… (optional)</div>
               </div>
-              <div class="ps-confirm" style="margin-top:12px">Save state</div>
+              <div class="ps-confirm" style="margin-top:12px" data-i18n="sc_save">Save state</div>
             </div>
           </div>
-          <div class="screen-label">Check-in ★</div>
+          <div class="screen-label" data-i18n="sc_label_checkin">Check-in ★</div>
         </div>
 
         <!-- DIARY -->
@@ -2278,7 +2346,7 @@ body {
               </div>
               <div class="ps-diary-top">
                 <div>
-                  <div style="font-size:7px;font-style:italic;color:rgba(240,235,248,0.4);margin-bottom:2px">monday, 23 feb</div>
+                  <div style="font-size:7px;font-style:italic;color:rgba(240,235,248,0.4);margin-bottom:2px" data-i18n="sc_diary_date">monday, 23 feb</div>
                   <div class="ps-diary-title">Lume</div>
                 </div>
                 <div style="display:flex;gap:5px">
@@ -2288,24 +2356,24 @@ body {
               </div>
               <div class="ps-tl">
                 <div class="ps-tl-line"></div>
-                <div class="ps-tl-section">☀ Morning</div>
+                <div class="ps-tl-section" data-i18n="sc_morning">☀ Morning</div>
                 <div class="ps-tl-entry">
                   <div class="ps-tl-dot-wrap">
                     <div class="ps-tl-dot" style="background:radial-gradient(circle at 35% 30%,#fff,#FFB830 60%,#c4870a)"></div>
                   </div>
                   <div class="ps-tl-card">
-                    <div class="ps-tl-card-mood">Radiant</div>
-                    <div class="ps-tl-card-note">Coffee and sun. Day starting well.</div>
+                    <div class="ps-tl-card-mood" data-i18n="sc_radiant">Radiant</div>
+                    <div class="ps-tl-card-note" data-i18n="sc_note1">Coffee and sun. Day starting well.</div>
                   </div>
                 </div>
-                <div class="ps-tl-section">🌅 Afternoon</div>
+                <div class="ps-tl-section" data-i18n="sc_afternoon">🌅 Afternoon</div>
                 <div class="ps-tl-entry">
                   <div class="ps-tl-dot-wrap">
                     <div class="ps-tl-dot" style="background:radial-gradient(circle at 35% 30%,#fff,#A78BFA 60%,#5b21b6)"></div>
                   </div>
                   <div class="ps-tl-card">
-                    <div class="ps-tl-card-mood">Calm</div>
-                    <div class="ps-tl-card-note">Quiet afternoon of work.</div>
+                    <div class="ps-tl-card-mood" data-i18n="sc_calm">Calm</div>
+                    <div class="ps-tl-card-note" data-i18n="sc_note2">Quiet afternoon of work.</div>
                   </div>
                 </div>
                 <div class="ps-tl-entry" style="margin-top:4px">
@@ -2313,31 +2381,31 @@ body {
                     <div class="ps-tl-dot" style="background:radial-gradient(circle at 35% 30%,#fff,#4A9EFF 60%,#1d5fb6)"></div>
                   </div>
                   <div class="ps-tl-card">
-                    <div class="ps-tl-card-mood">Reflection</div>
-                    <div class="ps-tl-card-note">Thinking about the project.</div>
+                    <div class="ps-tl-card-mood" data-i18n="sc_reflection">Reflection</div>
+                    <div class="ps-tl-card-note" data-i18n="sc_note3">Thinking about the project.</div>
                   </div>
                 </div>
-                <div class="ps-tl-section">🌙 Evening</div>
+                <div class="ps-tl-section" data-i18n="sc_evening">🌙 Evening</div>
                 <div class="ps-tl-entry">
                   <div class="ps-tl-dot-wrap">
                     <div class="ps-tl-dot" style="background:radial-gradient(circle at 35% 30%,#fff,#A78BFA 60%,#5b21b6)"></div>
                   </div>
                   <div class="ps-tl-card">
-                    <div class="ps-tl-card-mood">Calm</div>
-                    <div class="ps-tl-card-note">Serene night. Reading.</div>
+                    <div class="ps-tl-card-mood" data-i18n="sc_calm">Calm</div>
+                    <div class="ps-tl-card-note" data-i18n="sc_note4">Serene night. Reading.</div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="ps-nav">
-              <div class="ps-ni"><div class="ps-ni-i">⌂</div><div class="ps-ni-l">Home</div></div>
-              <div class="ps-ni"><div class="ps-ni-i">◎</div><div class="ps-ni-l">Check</div></div>
+              <div class="ps-ni"><div class="ps-ni-i">⌂</div><div class="ps-ni-l" data-i18n="sc_nav_home">Home</div></div>
+              <div class="ps-ni"><div class="ps-ni-i">◎</div><div class="ps-ni-l" data-i18n="sc_nav_check">Check</div></div>
               <div class="ps-ni on"><div class="ps-ni-i">◐</div><div class="ps-ni-d" style="background:var(--m3)"></div><div class="ps-ni-l">Lume</div></div>
-              <div class="ps-ni"><div class="ps-ni-i">✦</div><div class="ps-ni-l">Galaxy</div></div>
-              <div class="ps-ni"><div class="ps-ni-i">◉</div><div class="ps-ni-l">Profile</div></div>
+              <div class="ps-ni"><div class="ps-ni-i">✦</div><div class="ps-ni-l" data-i18n="sc_nav_galaxy">Galaxy</div></div>
+              <div class="ps-ni"><div class="ps-ni-i">◉</div><div class="ps-ni-l" data-i18n="sc_nav_profile">Profile</div></div>
             </div>
           </div>
-          <div class="screen-label">Diary (Lume)</div>
+          <div class="screen-label" data-i18n="sc_label_diary">Diary (Lume)</div>
         </div>
 
         <!-- GALAXY -->
@@ -2353,7 +2421,7 @@ body {
               </div>
               <div class="ps-galaxy-top">
                 <div>
-                  <div style="font-size:7px;font-style:italic;color:rgba(240,235,248,0.4);margin-bottom:2px">february, 2026</div>
+                  <div style="font-size:7px;font-style:italic;color:rgba(240,235,248,0.4);margin-bottom:2px" data-i18n="sc_galaxy_month">february, 2026</div>
                   <div class="ps-galaxy-title">Galaxy</div>
                 </div>
                 <div style="display:flex;gap:5px">
@@ -2396,7 +2464,7 @@ body {
                 <div class="ps-cal-day empty future"></div>
               </div>
               <div style="padding:10px 0 0">
-                <div style="font-family:'Cormorant Garamond',serif;font-size:11px;font-weight:300;margin-bottom:8px">This month</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:11px;font-weight:300;margin-bottom:8px" data-i18n="sc_this_month">This month</div>
                 <div style="display:flex;flex-direction:column;gap:5px">
                   <div style="display:flex;align-items:center;gap:6px">
                     <div style="width:6px;height:6px;border-radius:50%;background:var(--m2);flex-shrink:0"></div>
@@ -2412,14 +2480,14 @@ body {
               </div>
             </div>
             <div class="ps-nav">
-              <div class="ps-ni"><div class="ps-ni-i">⌂</div><div class="ps-ni-l">Home</div></div>
-              <div class="ps-ni"><div class="ps-ni-i">◎</div><div class="ps-ni-l">Check</div></div>
+              <div class="ps-ni"><div class="ps-ni-i">⌂</div><div class="ps-ni-l" data-i18n="sc_nav_home">Home</div></div>
+              <div class="ps-ni"><div class="ps-ni-i">◎</div><div class="ps-ni-l" data-i18n="sc_nav_check">Check</div></div>
               <div class="ps-ni"><div class="ps-ni-i">◐</div><div class="ps-ni-l">Lume</div></div>
-              <div class="ps-ni on"><div class="ps-ni-i">✦</div><div class="ps-ni-d" style="background:var(--m0)"></div><div class="ps-ni-l">Galaxy</div></div>
-              <div class="ps-ni"><div class="ps-ni-i">◉</div><div class="ps-ni-l">Profile</div></div>
+              <div class="ps-ni on"><div class="ps-ni-i">✦</div><div class="ps-ni-d" style="background:var(--m0)"></div><div class="ps-ni-l" data-i18n="sc_nav_galaxy">Galaxy</div></div>
+              <div class="ps-ni"><div class="ps-ni-i">◉</div><div class="ps-ni-l" data-i18n="sc_nav_profile">Profile</div></div>
             </div>
           </div>
-          <div class="screen-label">Galaxy</div>
+          <div class="screen-label" data-i18n="sc_label_galaxy">Galaxy</div>
         </div>
 
         <!-- PROFILE -->
@@ -2436,56 +2504,63 @@ body {
                 <div class="ps-profile-av-ring"></div>
               </div>
               <div class="ps-profile-name">Lucía</div>
-              <div class="ps-profile-since">on lume since jan 2026</div>
+              <div class="ps-profile-since" data-i18n="sc_since">on lume since jan 2026</div>
               <div class="ps-streak">
                 <span class="ps-streak-num">14</span>
-                <span class="ps-streak-label">days in a row</span>
+                <span class="ps-streak-label" data-i18n="sc_streak">days in a row</span>
               </div>
-              <div style="font-size:7px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(167,139,250,0.35);margin-bottom:7px;align-self:flex-start">Your dominant moods</div>
+              <div style="font-size:7px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(167,139,250,0.35);margin-bottom:7px;align-self:flex-start" data-i18n="sc_dominant">Your dominant moods</div>
               <div class="ps-id-moods" style="width:100%">
                 <div class="ps-id-mood">
                   <div class="ps-id-orb" style="background:radial-gradient(circle at 35% 30%,#fff,#A78BFA 60%,#5b21b6)"></div>
                   <div class="ps-id-pct">42%</div>
-                  <div class="ps-id-nm">Calm</div>
+                  <div class="ps-id-nm" data-i18n="sc_calm">Calm</div>
                 </div>
                 <div class="ps-id-mood">
                   <div class="ps-id-orb" style="background:radial-gradient(circle at 35% 30%,#fff,#FFB830 60%,#c4870a)"></div>
                   <div class="ps-id-pct">31%</div>
-                  <div class="ps-id-nm">Radiant</div>
+                  <div class="ps-id-nm" data-i18n="sc_radiant">Radiant</div>
                 </div>
                 <div class="ps-id-mood">
                   <div class="ps-id-orb" style="background:radial-gradient(circle at 35% 30%,#fff,#4A9EFF 60%,#1d5fb6)"></div>
                   <div class="ps-id-pct">18%</div>
-                  <div class="ps-id-nm">Reflection</div>
+                  <div class="ps-id-nm" data-i18n="sc_reflection">Reflection</div>
                 </div>
               </div>
               <div style="width:100%;margin-top:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden">
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.05)">
-                  <div style="display:flex;align-items:center;gap:7px;font-size:8px">🔔 <span>Reminder</span></div>
+                  <div style="display:flex;align-items:center;gap:7px;font-size:8px">🔔 <span data-i18n="sc_reminder">Reminder</span></div>
                   <div style="font-size:7px;color:rgba(240,235,248,0.35);font-style:italic">20:00</div>
                 </div>
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px">
-                  <div style="display:flex;align-items:center;gap:7px;font-size:8px">◑ <span>Visual mode</span></div>
+                  <div style="display:flex;align-items:center;gap:7px;font-size:8px">◑ <span data-i18n="sc_visual_mode">Visual mode</span></div>
                   <div style="width:24px;height:13px;border-radius:7px;background:rgba(167,139,250,0.4);border:1px solid rgba(167,139,250,0.4);position:relative"><div style="position:absolute;top:1px;right:2px;width:11px;height:11px;border-radius:50%;background:white"></div></div>
                 </div>
               </div>
             </div>
             <div class="ps-nav">
-              <div class="ps-ni"><div class="ps-ni-i">⌂</div><div class="ps-ni-l">Home</div></div>
-              <div class="ps-ni"><div class="ps-ni-i">◎</div><div class="ps-ni-l">Check</div></div>
+              <div class="ps-ni"><div class="ps-ni-i">⌂</div><div class="ps-ni-l" data-i18n="sc_nav_home">Home</div></div>
+              <div class="ps-ni"><div class="ps-ni-i">◎</div><div class="ps-ni-l" data-i18n="sc_nav_check">Check</div></div>
               <div class="ps-ni"><div class="ps-ni-i">◐</div><div class="ps-ni-l">Lume</div></div>
-              <div class="ps-ni"><div class="ps-ni-i">✦</div><div class="ps-ni-l">Galaxy</div></div>
-              <div class="ps-ni on"><div class="ps-ni-i">◉</div><div class="ps-ni-d"></div><div class="ps-ni-l">Profile</div></div>
+              <div class="ps-ni"><div class="ps-ni-i">✦</div><div class="ps-ni-l" data-i18n="sc_nav_galaxy">Galaxy</div></div>
+              <div class="ps-ni on"><div class="ps-ni-i">◉</div><div class="ps-ni-d"></div><div class="ps-ni-l" data-i18n="sc_nav_profile">Profile</div></div>
             </div>
           </div>
-          <div class="screen-label">Profile</div>
+          <div class="screen-label" data-i18n="sc_label_profile">Profile</div>
         </div>
 
       </div>
     </div>
-  </section>
 
-  <!-- ── 07 MICROINTERACCIÓN ── -->
+    <div class="reveal" style="margin-top:48px;text-align:center;">
+      <a href="app.html" target="_blank" rel="noopener" class="hero-cta-btn" style="display:inline-flex;">
+        <div class="hero-cta-mini-orb"></div>
+        <span data-i18n="hero_cta_label">Probar el prototipo</span>
+        <span class="hero-cta-arrow">→</span>
+      </a>
+      <div class="hero-cta-sub" data-i18n="hero_cta_sub" style="text-align:center;">Abre en nueva pestaña · experiencia completa</div>
+    </div>
+  </section>
   <section id="micro" class="section">
     <div class="section-eyebrow" data-i18n="s07_eyebrow">07 · Experiencia</div>
     <h2 class="section-title reveal" data-i18n="s07_title">The Glow Pulse —<br><em>la microinteracción</em></h2>
@@ -2505,7 +2580,7 @@ body {
             <div class="io-outer" id="orbOuter" style="background:#A78BFA"></div>
           </div>
         </div>
-        <div class="micro-label" id="moodLabel">🌸 <em>Calm</em></div>
+        <div class="micro-label" id="moodLabel"><em>Calm</em></div>
         <div class="demo-pips" id="demoPips">
           <div class="demo-pip" data-idx="0" style="background:#FFB830"></div>
           <div class="demo-pip" data-idx="1" style="background:#FF6B35"></div>
@@ -2720,11 +2795,11 @@ document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
 // ── INTERACTIVE ORB DEMO ──
 const moods = [
-  { name: '☀ Radiant',    color: '#FFB830', gr: 'radial-gradient(circle at 33% 28%,#fff,#FFD87A 35%,#FFB830 60%,#c4870a 85%)' },
-  { name: '🔥 Energy',    color: '#FF6B35', gr: 'radial-gradient(circle at 33% 28%,#fff,#FFA070 35%,#FF6B35 60%,#9e3d14 85%)' },
-  { name: '🌸 Calm',      color: '#A78BFA', gr: 'radial-gradient(circle at 33% 28%,#fff,#C4B5FD 35%,#8B5CF6 60%,#4C1D95 85%)' },
-  { name: '🌊 Reflection',color: '#4A9EFF', gr: 'radial-gradient(circle at 33% 28%,#fff,#93C5FD 35%,#4A9EFF 60%,#1d5fb6 85%)' },
-  { name: '🌑 Shadow',    color: '#9B6B9B', gr: 'radial-gradient(circle at 33% 28%,#fff,#C4A0C4 35%,#9B6B9B 60%,#5a3a5a 85%)' },
+  { en: 'Radiant',    es: 'Radiante',  color: '#FFB830', gr: 'radial-gradient(circle at 33% 28%,#fff,#FFD87A 35%,#FFB830 60%,#c4870a 85%)' },
+  { en: 'Energy',     es: 'Energía',   color: '#FF6B35', gr: 'radial-gradient(circle at 33% 28%,#fff,#FFA070 35%,#FF6B35 60%,#9e3d14 85%)' },
+  { en: 'Calm',       es: 'Calma',     color: '#A78BFA', gr: 'radial-gradient(circle at 33% 28%,#fff,#C4B5FD 35%,#8B5CF6 60%,#4C1D95 85%)' },
+  { en: 'Reflection', es: 'Reflexión', color: '#4A9EFF', gr: 'radial-gradient(circle at 33% 28%,#fff,#93C5FD 35%,#4A9EFF 60%,#1d5fb6 85%)' },
+  { en: 'Shadow',     es: 'Sombra',    color: '#9B6B9B', gr: 'radial-gradient(circle at 33% 28%,#fff,#C4A0C4 35%,#9B6B9B 60%,#5a3a5a 85%)' },
 ];
 let currentMood = 2;
 const orbShell = document.getElementById('orbShell');
@@ -2739,7 +2814,7 @@ function setMood(idx) {
   orbShell.style.background = m.gr;
   orbOuter.style.background = m.color;
   document.getElementById('demoOrb').style.boxShadow = `0 0 50px ${m.color}aa, 0 0 20px ${m.color}66`;
-  moodLabel.innerHTML = m.name.split(' ')[0] + ' <em>' + m.name.split(' ').slice(1).join(' ') + '</em>';
+  moodLabel.innerHTML = '<em>' + (currentLang === 'es' ? m.es : m.en) + '</em>';
   moodLabel.style.color = m.color;
   rings.forEach(r => r.style.borderColor = m.color + '30');
   demoPips.querySelectorAll('.demo-pip').forEach((p, i) => {
@@ -2935,6 +3010,48 @@ const translations = {
     s10_p1: 'Lume Mood es el proyecto que demuestra que el diseño de interfaz no es solo resolver problemas funcionales. Es también <strong>crear atmósferas, proponer metáforas</strong>, hacer que algo cotidiano —registrar cómo te sientes— se convierta en un momento que el usuario quiera vivir cada día.',
     s10_p2: 'Cada decisión —tipografía, animación, color, interacción— fluía de la misma idea central: <strong>las emociones son luz, y la luz se mueve.</strong>',
     s10_sig: 'Lume Mood · Proyecto UX/UI · 2026',
+    // CTA hero
+    hero_cta_label: 'Probar el prototipo',
+    hero_cta_sub: 'Abre en nueva pestaña · experiencia completa',
+    // Screens ES
+    sc_greet: 'Buenos días,',
+    sc_now: 'Ahora',
+    sc_calm: 'Calma',
+    sc_radiant: 'Radiante',
+    sc_reflection: 'Reflexión',
+    sc_mood_time: 'hace 2h · Tarde',
+    sc_home_note: 'Tarde tranquila, buen café. Presencia.',
+    sc_week: 'Esta semana',
+    sc_cta_label: 'Check-in diario',
+    sc_cta_text: '¿Cómo brillas ahora?',
+    sc_nav_home: 'Inicio',
+    sc_nav_check: 'Check',
+    sc_nav_galaxy: 'Galaxia',
+    sc_nav_profile: 'Perfil',
+    sc_label_home: 'Inicio',
+    sc_hint: 'arrastra · toca · siente',
+    sc_drag_sub: 'arrastra para cambiar',
+    sc_note_ph: 'Una nota sobre tu estado… (opcional)',
+    sc_save: 'Guardar estado',
+    sc_label_checkin: 'Check-in ★',
+    sc_diary_date: 'lunes, 23 feb',
+    sc_morning: '☀ Mañana',
+    sc_afternoon: '🌅 Tarde',
+    sc_evening: '🌙 Noche',
+    sc_note1: 'Café y sol. El día empieza bien.',
+    sc_note2: 'Tarde tranquila de trabajo.',
+    sc_note3: 'Pensando en el proyecto.',
+    sc_note4: 'Noche serena. Leyendo.',
+    sc_label_diary: 'Diario (Lume)',
+    sc_galaxy_month: 'febrero, 2026',
+    sc_this_month: 'Este mes',
+    sc_label_galaxy: 'Galaxia',
+    sc_since: 'en lume desde ene 2026',
+    sc_streak: 'días seguidos',
+    sc_dominant: 'Tus estados dominantes',
+    sc_reminder: 'Recordatorio',
+    sc_visual_mode: 'Modo visual',
+    sc_label_profile: 'Perfil',
   },
   en: {
     brand_sub: 'UX/UI Project · 2026',
@@ -3062,6 +3179,48 @@ const translations = {
     s10_p1: 'Lume Mood is the project that proves interface design is not just about solving functional problems. It is also about <strong>creating atmospheres, proposing metaphors</strong>, turning something everyday — recording how you feel — into a moment the user wants to live each day.',
     s10_p2: 'Every decision — typography, animation, color, interaction — flowed from the same central idea: <strong>emotions are light, and light moves.</strong>',
     s10_sig: 'Lume Mood · UX/UI Project · 2026',
+    // CTA hero
+    hero_cta_label: 'Try the prototype',
+    hero_cta_sub: 'Opens in new tab · full experience',
+    // Screens EN
+    sc_greet: 'Good morning,',
+    sc_now: 'Now',
+    sc_calm: 'Calm',
+    sc_radiant: 'Radiant',
+    sc_reflection: 'Reflection',
+    sc_mood_time: '2h ago · Afternoon',
+    sc_home_note: 'Quiet afternoon, good coffee. Feeling present.',
+    sc_week: 'This week',
+    sc_cta_label: 'Daily check-in',
+    sc_cta_text: 'How are you feeling now?',
+    sc_nav_home: 'Home',
+    sc_nav_check: 'Check',
+    sc_nav_galaxy: 'Galaxy',
+    sc_nav_profile: 'Profile',
+    sc_label_home: 'Home',
+    sc_hint: 'drag · tap · feel',
+    sc_drag_sub: 'drag to change',
+    sc_note_ph: 'A note about your state… (optional)',
+    sc_save: 'Save state',
+    sc_label_checkin: 'Check-in ★',
+    sc_diary_date: 'monday, 23 feb',
+    sc_morning: '☀ Morning',
+    sc_afternoon: '🌅 Afternoon',
+    sc_evening: '🌙 Evening',
+    sc_note1: 'Coffee and sun. Day starting well.',
+    sc_note2: 'Quiet afternoon of work.',
+    sc_note3: 'Thinking about the project.',
+    sc_note4: 'Serene night. Reading.',
+    sc_label_diary: 'Diary (Lume)',
+    sc_galaxy_month: 'february, 2026',
+    sc_this_month: 'This month',
+    sc_label_galaxy: 'Galaxy',
+    sc_since: 'on lume since jan 2026',
+    sc_streak: 'days in a row',
+    sc_dominant: 'Your dominant moods',
+    sc_reminder: 'Reminder',
+    sc_visual_mode: 'Visual mode',
+    sc_label_profile: 'Profile',
   }
 };
 
@@ -3079,6 +3238,8 @@ function setLang(lang) {
   document.getElementById('btnEs').classList.toggle('active', lang === 'es');
   document.getElementById('btnEn').classList.toggle('active', lang === 'en');
   document.documentElement.lang = lang;
+  // Refresh interactive orb mood label with correct language
+  if (typeof setMood === 'function') setMood(currentMood);
 }
 
 // Initialize in English on load
