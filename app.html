@@ -1338,12 +1338,22 @@ function openDayDetail(day) {
   const t = T[currentLang];
   const moods = getMoods();
   const entries = t.day_detail;
-  const moodIdxes = [1, 1, 3, 2];
 
-  // Use actual mood for the clicked day
-  const dayMoodIdx = CAL_DATA[day - 1];
-  const dom = moods[dayMoodIdx >= 0 ? dayMoodIdx : 2];
-  const domIdx = dayMoodIdx >= 0 ? dayMoodIdx : 2;
+  // Generate per-day mood entries using CAL_DATA as seed for variety
+  // The dominant mood (CAL_DATA) should be the most frequent in the entries
+  const dayMoodIdx = CAL_DATA[day - 1] >= 0 ? CAL_DATA[day - 1] : 2;
+  // Build moodIdxes so the dominant mood appears at least twice (most frequent)
+  const seed = day % 5;
+  const altMood1 = (dayMoodIdx + 1 + seed) % 5;
+  const altMood2 = (dayMoodIdx + 3 + seed) % 5;
+  // Dominant mood appears in entries[0] and entries[2] → most frequent = dayMoodIdx
+  const moodIdxes = [dayMoodIdx, altMood1, dayMoodIdx, altMood2];
+
+  // Dominant = most frequent among moodIdxes
+  const freq = {};
+  moodIdxes.forEach(m => freq[m] = (freq[m] || 0) + 1);
+  const domIdx = parseInt(Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b));
+  const dom = moods[domIdx];
   document.getElementById('day-dom-shell').style.background = `radial-gradient(circle at 38% 32%, rgba(255,255,255,.55), ${MOOD_COLORS[domIdx]} 55%, rgba(0,0,0,.25))`;
   document.getElementById('day-dom-glow').style.background = MOOD_COLORS[domIdx];
   document.getElementById('day-dom-name').textContent = dom.name;
@@ -1381,11 +1391,92 @@ function openDayDetail(day) {
     domCard.style.cssText = `margin:0 20px 14px;padding:11px 14px;border-radius:14px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);`;
   }
 
+  // Mood-aware copy banks (ES / EN) per mood index
+  const MOOD_NOTES = {
+    es: [
+      // 0 Radiante
+      [
+        { slot:'Mañana',   time:'08:10', note:'Me desperté con una sonrisa. Algo en el aire me decía que iba a ser un día especial.' },
+        { slot:'Mediodía', time:'12:45', note:'Todo fluyendo. Las conversaciones, el trabajo, incluso el café estaba perfecto.' },
+        { slot:'Tarde',    time:'17:30', note:'Productividad máxima. Terminé todo y hasta me sobró tiempo para pasear.' },
+        { slot:'Noche',    time:'21:50', note:'Qué día tan completo. Me fui a la cama sintiéndome en paz y llena de gratitud.' },
+      ],
+      // 1 Energía
+      [
+        { slot:'Mañana',   time:'07:50', note:'Empecé el día disparada. Lista para conquistar todo lo que tenía pendiente.' },
+        { slot:'Mediodía', time:'12:30', note:'Sin parar desde las 8h. Reunión, sprint, otra reunión. Adrenalina a tope.' },
+        { slot:'Tarde',    time:'17:45', note:'El cuerpo acusa el ritmo pero la mente sigue encendida. No quiero parar.' },
+        { slot:'Noche',    time:'22:00', note:'Por fin paré. Un baño caliente y a descansar. Mañana con más calma.' },
+      ],
+      // 2 Calma
+      [
+        { slot:'Mañana',   time:'08:30', note:'Me desperté despacio. Sin prisa. El té, la ventana abierta, el silencio.' },
+        { slot:'Mediodía', time:'13:00', note:'Comida tranquila. Escuché música suave y dejé que el tiempo pasara sin forzar nada.' },
+        { slot:'Tarde',    time:'18:00', note:'Una caminata corta. El cuerpo pide movimiento suave, sin exigirse demasiado.' },
+        { slot:'Noche',    time:'21:30', note:'Leí un rato antes de dormir. Me sentí en casa conmigo misma.' },
+      ],
+      // 3 Reflexión
+      [
+        { slot:'Mañana',   time:'08:00', note:'Me quedé mirando el techo unos minutos. Hay algo que necesita ordenarse por dentro.' },
+        { slot:'Mediodía', time:'13:15', note:'Comí sola, con intención. Pensé mucho en cómo quiero que sea esta etapa.' },
+        { slot:'Tarde',    time:'17:00', note:'Escribí en el cuaderno. Las palabras ayudan a ver lo que la mente no sabe nombrar.' },
+        { slot:'Noche',    time:'22:30', note:'Noche de preguntas. No todas tienen respuesta, y eso también está bien.' },
+      ],
+      // 4 Sombra
+      [
+        { slot:'Mañana',   time:'09:00', note:'Cuesta arrancar. El cuerpo pesa y la motivación no llega. Me permití ir despacio.' },
+        { slot:'Mediodía', time:'13:30', note:'Día gris por dentro. Hice lo mínimo. A veces eso es suficiente.' },
+        { slot:'Tarde',    time:'17:00', note:'Necesitaba estar sola. Sin ruido, sin exigencias. Solo existir un rato.' },
+        { slot:'Noche',    time:'21:00', note:'Me fui a dormir pronto. Mañana puede ser diferente. Por hoy, descanso.' },
+      ],
+    ],
+    en: [
+      // 0 Radiant
+      [
+        { slot:'Morning',   time:'08:10', note:'Woke up smiling. Something in the air told me today was going to be something else.' },
+        { slot:'Midday',    time:'12:45', note:'Everything flowing — conversations, work, even the coffee was perfect.' },
+        { slot:'Afternoon', time:'17:30', note:'Peak productivity. Finished everything and still had time for a walk.' },
+        { slot:'Evening',   time:'21:50', note:'What a full day. Went to bed feeling at peace and deeply grateful.' },
+      ],
+      // 1 Energy
+      [
+        { slot:'Morning',   time:'07:50', note:'Started the day fired up. Ready to tackle everything on my list.' },
+        { slot:'Midday',    time:'12:30', note:'Non-stop since 8am. Meeting, sprint, another meeting. Adrenaline peaking.' },
+        { slot:'Afternoon', time:'17:45', note:'Body feels the pace but the mind is still on fire. I don\'t want to stop.' },
+        { slot:'Evening',   time:'22:00', note:'Finally stopped. A warm bath and off to rest. Tomorrow, more calmly.' },
+      ],
+      // 2 Calm
+      [
+        { slot:'Morning',   time:'08:30', note:'Woke up slowly. No rush. Tea, open window, quiet.' },
+        { slot:'Midday',    time:'13:00', note:'A peaceful lunch. Soft music and letting time pass without forcing anything.' },
+        { slot:'Afternoon', time:'18:00', note:'A short walk. The body asks for gentle movement, nothing too demanding.' },
+        { slot:'Evening',   time:'21:30', note:'Read a bit before sleep. Felt at home with myself.' },
+      ],
+      // 3 Reflection
+      [
+        { slot:'Morning',   time:'08:00', note:'Lay staring at the ceiling for a while. Something inside needs sorting out.' },
+        { slot:'Midday',    time:'13:15', note:'Ate alone, intentionally. Thought a lot about what I want this chapter to look like.' },
+        { slot:'Afternoon', time:'17:00', note:'Wrote in my notebook. Words help see what the mind can\'t quite name.' },
+        { slot:'Evening',   time:'22:30', note:'A night of questions. Not all of them have answers — and that\'s okay.' },
+      ],
+      // 4 Shadow
+      [
+        { slot:'Morning',   time:'09:00', note:'Hard to start. The body feels heavy and motivation just isn\'t there. I let myself go slow.' },
+        { slot:'Midday',    time:'13:30', note:'Grey day inside. Did the minimum. Sometimes that\'s enough.' },
+        { slot:'Afternoon', time:'17:00', note:'Needed to be alone. No noise, no demands. Just exist for a while.' },
+        { slot:'Evening',   time:'21:00', note:'Went to bed early. Tomorrow can be different. For today — rest.' },
+      ],
+    ],
+  };
+
   const el = document.getElementById('day-entries');
   el.innerHTML = '';
   entries.forEach((entry, i) => {
     const mIdx = moodIdxes[i];
     const mc = MOOD_COLORS[mIdx]; const mr = MOOD_RGB[mIdx];
+    // Use mood-coherent copy for this entry's mood
+    const noteBank = MOOD_NOTES[currentLang][mIdx];
+    const noteEntry = noteBank[i] || noteBank[0];
     const div = document.createElement('div');
     div.style.cssText = `margin-bottom:10px;animation:fsu .5s ${i*.1}s ease both;`;
 
@@ -1406,11 +1497,11 @@ function openDayDetail(day) {
             <div style="position:absolute;inset:-20%;border-radius:50%;background:${mc};opacity:.35;filter:blur(8px);"></div>
           </div>
           <div>
-            <div style="font-size:9px;color:${slotColor};letter-spacing:.08em;text-transform:uppercase;">${entry.slot} · ${entry.time}</div>
+            <div style="font-size:9px;color:${slotColor};letter-spacing:.08em;text-transform:uppercase;">${noteEntry.slot} · ${noteEntry.time}</div>
             <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:${mc};line-height:1;">${moods[mIdx].name}</div>
           </div>
         </div>
-        <div style="font-size:13px;color:${noteColor};font-style:italic;line-height:1.6;position:relative;">"${entry.note}"</div>
+        <div style="font-size:13px;color:${noteColor};font-style:italic;line-height:1.6;position:relative;">"${noteEntry.note}"</div>
       </div>`;
     el.appendChild(div);
   });
