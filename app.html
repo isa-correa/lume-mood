@@ -478,6 +478,34 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
     transition: box-shadow 1.5s ease;
   }
 }
+
+/* ── CTA ANIMATED RING ── */
+.cta-flame-wrap {
+  position: relative;
+  width: 56px; height: 56px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.cta-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(var(--mood-r), 0.55);
+  animation: cta-pulse 2.2s ease-out infinite;
+  pointer-events: none;
+}
+.cta-ring:nth-child(2) {
+  animation-delay: 0.7s;
+  border-color: rgba(var(--mood-r), 0.3);
+}
+.cta-ring:nth-child(3) {
+  animation-delay: 1.4s;
+  border-color: rgba(var(--mood-r), 0.15);
+}
+@keyframes cta-pulse {
+  0%   { transform: scale(1);   opacity: 1; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
 </style>
 </head>
 <body>
@@ -498,7 +526,7 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
 
   <!-- ══ HOME ══ -->
   <div class="screen" id="home">
-    <div class="sb"><span class="t">21:41</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
+    <div class="sb"><span class="t sb-clock">--:--</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
     <div class="body">
       <div class="home-top">
         <div>
@@ -539,7 +567,12 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
             <div class="cta-lbl">Check-in</div>
             <div class="cta-text" id="home-cta-text">¿Cómo brillas ahora?</div>
           </div>
-          <div class="flame" id="home-flame">✦</div>
+          <div class="cta-flame-wrap">
+            <div class="cta-ring"></div>
+            <div class="cta-ring"></div>
+            <div class="cta-ring"></div>
+            <div class="flame" id="home-flame">✦</div>
+          </div>
         </div>
       </div>
 
@@ -547,7 +580,7 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
         <div class="lbl" id="lbl-constelacion">Tu constelación</div>
         <div class="stats-row">
           <div class="stat">
-            <div class="stat-val" style="color:var(--mood);transition:color 1.5s">7</div>
+            <div class="stat-val" style="color:var(--mood);transition:color 1.5s">27</div>
             <div class="stat-lbl" id="stat-streak-lbl">días seguidos</div>
           </div>
           <div class="sdiv"></div>
@@ -557,7 +590,7 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
           </div>
           <div class="sdiv"></div>
           <div class="stat">
-            <div class="stat-val" style="color:var(--mood);transition:color 1.5s">74%</div>
+            <div class="stat-val" id="stat-pct" style="color:var(--mood);transition:color 1.5s">33%</div>
             <div class="stat-lbl" id="stat-radiant-lbl">días radiantes</div>
           </div>
         </div>
@@ -568,7 +601,7 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
 
   <!-- ══ CHECK-IN ══ -->
   <div class="screen hidden" id="checkin">
-    <div class="sb"><span class="t">21:41</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
+    <div class="sb"><span class="t sb-clock">--:--</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
     <div class="ci-header">
       <div class="back" onclick="showScreen('home')">←</div>
       <div class="ci-title" id="ci-title-text">check-in · ahora</div>
@@ -607,7 +640,7 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
 
   <!-- ══ CONFIRMATION ══ -->
   <div class="screen hidden" id="confirmation">
-    <div class="sb"><span class="t">21:41</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
+    <div class="sb"><span class="t sb-clock">--:--</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
     <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 28px;text-align:center;">
       <div class="burst" id="burst">
         <div class="burst-shell" id="burst-shell"></div>
@@ -622,7 +655,7 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
 
   <!-- ══ LUME DIARY ══ -->
   <div class="screen hidden" id="lume">
-    <div class="sb"><span class="t">21:41</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
+    <div class="sb"><span class="t sb-clock">--:--</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
     <div class="body">
       <div class="lume-top">
         <div>
@@ -652,7 +685,7 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
 
   <!-- ══ GALAXIA ══ -->
   <div class="screen hidden" id="galaxia">
-    <div class="sb"><span class="t">21:41</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
+    <div class="sb"><span class="t sb-clock">--:--</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
     <div class="body">
       <div class="gal-top">
         <div class="gal-title" id="gal-title">Galaxia</div>
@@ -682,7 +715,7 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
 
   <!-- ══ PERFIL ══ -->
   <div class="screen hidden" id="perfil">
-    <div class="sb"><span class="t">21:41</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
+    <div class="sb"><span class="t sb-clock">--:--</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
     <div class="body">
       <div class="perfil-header">
         <div class="perfil-avatar">
@@ -696,7 +729,7 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
       </div>
 
       <div class="gc streak-card">
-        <div class="streak-num" id="streak-num">7</div>
+        <div class="streak-num" id="streak-num">27</div>
         <div class="streak-right">
           <div class="streak-label" id="streak-label">días de racha</div>
           <div class="streak-sub" id="streak-sub">Tu luz nunca se ha<br>apagado esta semana ✦</div>
@@ -757,7 +790,7 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
     <div id="day-overlay-bg" style="position:absolute;inset:0;backdrop-filter:blur(22px);"></div>
     <div id="day-overlay-grad" style="position:absolute;inset:0;pointer-events:none;"></div>
     <div id="day-overlay-inner" style="position:relative;z-index:1;display:flex;flex-direction:column;height:100%;">
-      <div class="sb"><span class="t">21:41</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
+      <div class="sb"><span class="t sb-clock">--:--</span><span style="letter-spacing:.05em">•••</span><span>🔋</span></div>
       <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px 8px;">
         <div>
           <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px;opacity:.5;" id="overlay-day-name">Miércoles</div>
@@ -822,9 +855,9 @@ const T = {
     week_days: ['L','M','X','J','V','S','D'],
     cal_days: ['D','L','M','X','J','V','S'],
     diary: [
-      { time:'08:15', slot:'Mañana',  note:'Reunión temprana. Me sentí activa y con energía, aunque nerviosa.' },
-      { time:'14:30', slot:'Tarde',   note:'El día fue tranquilo. Una taza de té y música suave.' },
-      { time:'21:41', slot:'Noche',   note:'Hoy me voy antes a la cama para aprovechar y leer.' },
+      { time:'08:15', slot:'Mañana',  note:'Reunión temprana. Me sentí activa y con energía, aunque nerviosa.', moodIdx: 0 },
+      { time:'14:30', slot:'Tarde',   note:'El día fue tranquilo. Una taza de té y música suave.', moodIdx: 3 },
+      { time:'21:41', slot:'Noche',   note:'Hoy me voy antes a la cama para aprovechar y leer.', moodIdx: 2 },
     ],
     day_detail: [
       { time:'07:50', slot:'Mañana',   note:'Empecé el día disparada. Lista para conquistar todo lo que tenía pendiente.' },
@@ -864,7 +897,7 @@ const T = {
     ms_title: 'Distribución del mes',
     identity_title: 'Tus luces más frecuentes',
     streak_label: 'días de racha',
-    streak_sub: 'Tu luz nunca se ha<br>apagado esta semana ✦',
+    streak_sub: 'Tu luz lleva 27 días<br>sin apagarse ✦',
     perfil_since: 'brillando desde enero 2026',
     settings_pref: 'Preferencias',
     settings_account: 'Cuenta',
@@ -891,9 +924,9 @@ const T = {
     week_days: ['M','T','W','T','F','S','S'],
     cal_days: ['S','M','T','W','T','F','S'],
     diary: [
-      { time:'08:15', slot:'Morning',   note:'Early meeting. Felt active and energized, though a little nervous.' },
-      { time:'14:30', slot:'Afternoon', note:'The day was quiet. A cup of tea and soft music.' },
-      { time:'21:41', slot:'Evening',   note:'Going to bed early tonight to read.' },
+      { time:'08:15', slot:'Morning',   note:'Early meeting. Felt active and energized, though a little nervous.', moodIdx: 0 },
+      { time:'14:30', slot:'Afternoon', note:'The day was quiet. A cup of tea and soft music.', moodIdx: 3 },
+      { time:'21:41', slot:'Evening',   note:'Going to bed early tonight to read.', moodIdx: 2 },
     ],
     day_detail: [
       { time:'07:50', slot:'Morning',   note:'Started the day fired up. Ready to tackle everything on my list.' },
@@ -933,7 +966,7 @@ const T = {
     ms_title: 'Month distribution',
     identity_title: 'Your most frequent lights',
     streak_label: 'day streak',
-    streak_sub: 'Your light has never gone<br>out this week ✦',
+    streak_sub: 'Your light has been shining<br>for 27 days straight ✦',
     perfil_since: 'shining since January 2026',
     settings_pref: 'Preferences',
     settings_account: 'Account',
@@ -964,10 +997,10 @@ const WEEK = [
   {d:0,m:0},{d:1,m:2},{d:2,m:1},{d:3,m:2},{d:4,m:3},{d:5,m:2},{d:6,m:-1}
 ];
 
-const CAL_DATA = [2,1,0,2,3,2,4, 0,2,2,1,0,2,3, 2,4,0,2,1,2,0, 3,2,2,1,0,2,-1];
+const CAL_DATA = [2,1,0,2,3,2,4, 0,2,4,1,0,2,3, 2,4,0,2,1,4,0, 3,3,2,1,0,2,-1];
 const STATS_DIST = [
-  { moodIdx:0, count:5 },{ moodIdx:1, count:4 },{ moodIdx:2, count:11 },
-  { moodIdx:3, count:5 },{ moodIdx:4, count:3 },
+  { moodIdx:0, count:6 },{ moodIdx:1, count:4 },{ moodIdx:2, count:9 },
+  { moodIdx:3, count:4 },{ moodIdx:4, count:4 },
 ];
 
 const NAV_IDS = ['home','lume','galaxia','perfil'];
@@ -1094,6 +1127,29 @@ function showScreen(id) {
     document.getElementById('conf-mood-word').style.color = MOOD_COLORS[currentMoodIdx];
     document.getElementById('conf-sub').innerHTML = `${t.conf_sub_prefix}<br><strong id="conf-mood-word" style="color:${MOOD_COLORS[currentMoodIdx]}">${m.name}</strong> ${t.conf_sub_suffix}`;
     applyTheme(currentMoodIdx);
+
+    // Save new entry to diary with real time
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2,'0');
+    const mm2 = String(now.getMinutes()).padStart(2,'0');
+    const realTime = hh + ':' + mm2;
+    const noteVal = (document.getElementById('ci-note').value || '').trim();
+    const hour = now.getHours();
+    const slotEs = hour < 6 ? 'Madrugada' : hour < 12 ? 'Mañana' : hour < 17 ? 'Mediodía' : hour < 21 ? 'Tarde' : 'Noche';
+    const slotEn = hour < 6 ? 'Night' : hour < 12 ? 'Morning' : hour < 17 ? 'Midday' : hour < 21 ? 'Afternoon' : 'Evening';
+    T.es.diary.unshift({ slot: slotEs, time: realTime, note: noteVal || '—', moodIdx: currentMoodIdx });
+    T.en.diary.unshift({ slot: slotEn, time: realTime, note: noteVal || '—', moodIdx: currentMoodIdx });
+    // Rebuild diary immediately so the entry is visible when navigating to Lume
+    rebuildDiary();
+    // Update home
+    const timeLabel = currentLang==='es' ? 'Último registro · ' : 'Last entry · ';
+    document.getElementById('home-mood-time').textContent = timeLabel + realTime;
+    if(noteVal) document.getElementById('home-mood-note').textContent = `"${noteVal}"`;
+    document.getElementById('home-mood-name').textContent = m.name;
+    document.getElementById('home-mood-name').style.color = MOOD_COLORS[currentMoodIdx];
+    setBulb(document.getElementById('home-bulb-inner'), document.getElementById('home-bulb-glow'), currentMoodIdx);
+    document.getElementById('ci-note').value = '';
+    document.getElementById('note-count').textContent = '0 / 120';
   }
   if(id === 'home') {
     const moods = getMoods();
@@ -1145,8 +1201,8 @@ function rebuildDiary() {
   const diary = T[currentLang].diary;
   const moods = getMoods();
   diary.forEach((entry, i) => {
-    const m = moods[entry.moodIdx !== undefined ? entry.moodIdx : [1,2,3][i]];
-    const mIdx = [1,2,3][i];
+    const mIdx = entry.moodIdx !== undefined ? entry.moodIdx : 2;
+    const m = moods[mIdx];
     const mc = MOOD_COLORS[mIdx]; const mr = MOOD_RGB[mIdx];
     const div = document.createElement('div');
     div.className = 'tl-entry'; div.style.animationDelay = (i * 0.12) + 's';
@@ -1608,20 +1664,38 @@ function closeEditModal() {
 
 function saveEditModal() {
   const note = document.getElementById('edit-note').value.trim();
-  const t = T[currentLang];
-  // Update the diary entry in memory
-  if(editEntryIdx >= 0 && t.diary[editEntryIdx]) {
-    t.diary[editEntryIdx].note = note;
+  // Persist both note and moodIdx in both languages
+  ['es','en'].forEach(lang => {
+    if(T[lang].diary[editEntryIdx]) {
+      T[lang].diary[editEntryIdx].note = note;
+      T[lang].diary[editEntryIdx].moodIdx = editSelectedMood;
+    }
+  });
+  // If it's the most recent entry, update home display too
+  if(editEntryIdx === 0) {
+    if(note) document.getElementById('home-mood-note').textContent = `"${note}"`;
+    document.getElementById('home-mood-name').textContent = getMoods()[editSelectedMood].name;
+    document.getElementById('home-mood-name').style.color = MOOD_COLORS[editSelectedMood];
+    setBulb(document.getElementById('home-bulb-inner'), document.getElementById('home-bulb-glow'), editSelectedMood);
   }
-  // Update home note if it's the last (evening) entry
-  if(editEntryIdx === 2 && note) {
-    document.getElementById('home-mood-note').textContent = `"${note}"`;
-  }
-  // Rebuild diary to reflect changes
   rebuildDiary();
   closeEditModal();
 }
 
+
+
+// ═══════════════════════════════════
+// LIVE CLOCK
+// ═══════════════════════════════════
+function updateClocks() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2, '0');
+  const m = String(now.getMinutes()).padStart(2, '0');
+  const timeStr = h + ':' + m;
+  document.querySelectorAll('.sb-clock').forEach(el => el.textContent = timeStr);
+}
+updateClocks();
+setInterval(updateClocks, 15000);
 
 (function init(){
   buildParticles();
