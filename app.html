@@ -659,7 +659,7 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
     <div class="body">
       <div class="lume-top">
         <div>
-          <div class="lume-date" id="lume-date">lunes · 23 febrero</div>
+          <div class="lume-date" id="lume-date">sábado · 28 febrero</div>
           <div class="lume-title-main" id="lume-title">Mi diario</div>
         </div>
         <div class="lume-logo" style="padding-top:18px">lume</div>
@@ -865,8 +865,11 @@ const T = {
       { time:'17:45', slot:'Tarde',    note:'El cuerpo empieza a acusar el ritmo. Mucho trabajo acumulado, la cabeza no para.' },
       { time:'22:00', slot:'Noche',    note:'Por fin paré. Un baño caliente y a descansar. Mañana con más calma.' },
     ],
+    home_greeting_morning: 'buenos días,',
+    home_greeting_afternoon: 'buenas tardes,',
     home_greeting_night: 'buenas noches,',
     home_greeting_day:   'buenas tardes,',
+    home_avatar_morning: 'mañana',
     home_avatar_night: 'noche',
     home_avatar_day: 'tarde',
     lbl_tu_luz: 'Tu luz de hoy',
@@ -887,7 +890,7 @@ const T = {
     conf_sub_prefix: 'Esta noche brillas con',
     conf_sub_suffix: '— sigue brillando.',
     conf_home_btn: 'Volver al inicio',
-    lume_date: 'lunes · 23 febrero',
+    lume_date: 'sábado · 28 febrero',
     lume_title: 'Mi diario',
     lbl_hoy: 'Hoy',
     add_text: 'Añadir nuevo registro de luz…',
@@ -934,8 +937,11 @@ const T = {
       { time:'17:45', slot:'Afternoon', note:'The body is starting to feel the pace. Too much on my mind.' },
       { time:'22:00', slot:'Evening',   note:'Finally stopped. A warm bath and off to rest. Tomorrow, more calmly.' },
     ],
+    home_greeting_morning: 'good morning,',
+    home_greeting_afternoon: 'good afternoon,',
     home_greeting_night: 'good evening,',
     home_greeting_day:   'good afternoon,',
+    home_avatar_morning: 'morning',
     home_avatar_night: 'night',
     home_avatar_day: 'day',
     lbl_tu_luz: 'Your light today',
@@ -956,7 +962,7 @@ const T = {
     conf_sub_prefix: 'Tonight you shine with',
     conf_sub_suffix: '— keep shining.',
     conf_home_btn: 'Back to home',
-    lume_date: 'monday · 23 february',
+    lume_date: 'saturday · 28 february',
     lume_title: 'My diary',
     lbl_hoy: 'Today',
     add_text: 'Add new light entry…',
@@ -1057,8 +1063,8 @@ function setLanguage(lang) {
   document.getElementById('overlay-dominant-lbl').textContent = t.overlay_dominant;
 
   // Greeting
-  document.getElementById('home-greeting').textContent = isNightMode ? t.home_greeting_night : t.home_greeting_day;
-  document.getElementById('home-avatar-label').textContent = isNightMode ? t.home_avatar_night : t.home_avatar_day;
+  document.getElementById('home-greeting').textContent = getTimeGreeting(t);
+  document.getElementById('home-avatar-label').textContent = getTimeAvatarLabel(t);
 
   // Mood name in home + stat
   const moods = getMoods();
@@ -1576,6 +1582,20 @@ document.getElementById('day-overlay-close').addEventListener('click', () => {
 // ═══════════════════════════════════
 // NIGHT MODE
 // ═══════════════════════════════════
+// ── TIME-BASED GREETING ──
+function getTimeGreeting(t) {
+  const h = new Date().getHours();
+  if (h >= 5 && h < 13) return t.home_greeting_morning;
+  if (h >= 13 && h < 21) return t.home_greeting_afternoon;
+  return t.home_greeting_night;
+}
+function getTimeAvatarLabel(t) {
+  const h = new Date().getHours();
+  if (h >= 5 && h < 13) return t.home_avatar_morning;
+  if (h >= 13 && h < 21) return t.home_avatar_day;
+  return t.home_avatar_night;
+}
+
 function applyModeChange() {
   document.body.classList.toggle('day-mode', !isNightMode);
   const t = T[currentLang];
@@ -1584,8 +1604,8 @@ function applyModeChange() {
   document.getElementById('night-mode-label').textContent = isNightMode ? t.s_night_on : t.s_night_off;
   document.getElementById('night-icon').textContent = isNightMode ? '🌙' : '☀️';
   document.getElementById('home-mode-btn').textContent = isNightMode ? '🌙' : '☀️';
-  document.getElementById('home-greeting').textContent = isNightMode ? t.home_greeting_night : t.home_greeting_day;
-  document.getElementById('home-avatar-label').textContent = isNightMode ? t.home_avatar_night : t.home_avatar_day;
+  document.getElementById('home-greeting').textContent = getTimeGreeting(t);
+  document.getElementById('home-avatar-label').textContent = getTimeAvatarLabel(t);
   const avatarIcon = document.querySelector('#home-avatar span:first-child');
   if(avatarIcon) avatarIcon.textContent = isNightMode ? '☽' : '✦';
 }
