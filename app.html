@@ -95,6 +95,9 @@ html, body {
   flex-shrink: 0;
   z-index: 5;
   position: relative;
+  min-height: 50px;
+  height: fit-content;
+  width: 100%;
 }
 .sb .t { font-size: 15px; font-weight: 400; color: var(--text); }
 
@@ -194,14 +197,14 @@ html, body {
 /* ═══════════════════════════════════
    CHECK-IN
 ═══════════════════════════════════ */
-#checkin { align-items: center; padding: 0 18px calc(var(--safe-bottom) + 24px); }
+#checkin { align-items: flex-start; padding: 0 18px calc(var(--safe-bottom) + 24px); display: flex; flex-direction: column; }
 .ci-header { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 10px 0 6px; }
 .back { width: 38px; height: 38px; border-radius: 50%; background: var(--glass); border: 1px solid var(--glass-b); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; transition: transform .2s; backdrop-filter: blur(20px); }
 .back:active { transform: scale(.9); }
 .ci-title { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: var(--muted); letter-spacing: .06em; }
 .lume-logo { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; letter-spacing: .2em; color: var(--muted); }
 
-.orb-area { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; position: relative; cursor: grab; user-select: none; }
+.orb-area { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; position: relative; cursor: grab; user-select: none; min-height: 0; }
 .orb-area:active { cursor: grabbing; }
 .orb-hint { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; animation: fade-blink 3s ease-in-out infinite; }
 @keyframes fade-blink { 0%,100%{opacity:.4} 50%{opacity:.9} }
@@ -774,7 +777,7 @@ body.day-mode .pt { background: rgba(var(--mood-r),.4); }
         <div class="settings-title" id="settings-account-title">Cuenta</div>
         <div class="gc" style="overflow:hidden">
           <div class="setting-row">
-            <div class="setting-left"><span class="setting-icon">✉️</span><span class="setting-name"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="21524e474840614d544c440f405151">[email&#160;protected]</a></span></div>
+            <div class="setting-left"><span class="setting-icon">✉️</span><span class="setting-name">sofia@lumemood.com</span></div>
           </div>
           <div class="setting-row" style="cursor:pointer">
             <div class="setting-left"><span class="setting-icon" style="color:#ff6b6b">↩</span><span class="setting-name" style="color:#ff6b6b;opacity:.7" id="s-logout">Cerrar sesión</span></div>
@@ -977,8 +980,8 @@ const T = {
     settings_pref: 'Preferences',
     settings_account: 'Account',
     s_reminder: 'Daily reminder',
-    s_night_on: 'Night mode',
-    s_night_off: 'Day mode',
+    s_night_on: 'Dark Mode',
+    s_night_off: 'Light Mode',
     s_anim: 'Animations',
     s_lang: 'Idioma / Language',
     s_privacy: 'Privacy',
