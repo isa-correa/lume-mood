@@ -1170,6 +1170,12 @@ function showScreen(id) {
     document.getElementById('home-bulb').style.boxShadow = `0 0 24px rgba(${MOOD_RGB[currentMoodIdx]},.55), 0 0 48px rgba(${MOOD_RGB[currentMoodIdx]},.25)`;
     applyTheme(currentMoodIdx);
   }
+  if(id === 'perfil') {
+    const moods = getMoods();
+    document.getElementById('pa-shell').style.background = `radial-gradient(circle at 38% 32%,rgba(255,255,255,.5),${MOOD_COLORS[currentMoodIdx]} 55%,rgba(0,0,0,.2))`;
+    document.getElementById('pa-outer').style.background = MOOD_COLORS[currentMoodIdx];
+    document.getElementById('pa-ring').style.borderColor = `rgba(${MOOD_RGB[currentMoodIdx]},.3)`;
+  }
 }
 
 // ═══════════════════════════════════
